@@ -13,7 +13,17 @@ pipeline {
             steps {
 
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                bat 'stage for development'
+                bat 'echo "stage for development"'
+            }
+        }
+        stage('nightly build') {
+            when {
+                branch 'master'
+            }
+            steps {
+
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                bat 'echo "stage for master"'
             }
         }
         stage('Deploy for production') {
@@ -23,7 +33,7 @@ pipeline {
             steps {
 
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                bat 'stage for procuction'
+                bat 'echo "stage for procuction"'
             }
         }
     }
