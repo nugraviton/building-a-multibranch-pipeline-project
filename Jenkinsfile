@@ -31,7 +31,7 @@ pipeline {
             when {
                 branch 'production'
             }
-            
+            steps{
                 env.PROD_DEPLOYMENT = input message: 'User input required',
                     parameters: [
                             choice(name: 'Production release?', 
@@ -41,6 +41,7 @@ pipeline {
             if(PROD_DEPLOYMENT == 'yes'){
                 echo 'Deployed on production!'
             }
+           }
         }
         stage('Deploy for production') {
             when {
