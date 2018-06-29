@@ -28,12 +28,13 @@ pipeline {
          }
                 
         stage('Deloy - Staging') {            
-            
-            DEPLOY_STAGING = input message: 'Deploy to staging?',
+            environment {
+              DEPLOY_STAGING = input message: 'Deploy to staging?',
                   parameters: [
                             choice(name: 'Deploy to staging?', 
                             choices: 'no\nyes', 
-                            description: 'Choose "yes" if you want to deploy to staging')]                           
+                            description: 'Choose "yes" if you want to deploy to staging')]    
+            }
             when {
                 allOf {
                   branch 'production'
@@ -47,11 +48,14 @@ pipeline {
         }
         
         stage('Deploy - Production') {
-            DEPLOY_PRODUCTION = input message: 'Deploy to production?',
+            
+            environment {
+              DEPLOY_PRODUCTION = input message: 'Deploy to production?',
                   parameters: [
                             choice(name: 'Deploy to production?', 
                             choices: 'no\nyes', 
                             description: 'Choose "yes" if you want to deploy to production')]                           
+            }
             when {
                 allOf {
                   branch 'production'
