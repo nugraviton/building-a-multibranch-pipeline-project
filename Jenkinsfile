@@ -19,10 +19,8 @@ pipeline {
             when {
                 branch 'development'
             }
-            steps {
-                
-                    echo 'only for development branch'
-                                
+            steps {                
+                    echo 'only for development branch'                                
             }
         }
         
@@ -54,4 +52,14 @@ pipeline {
             }
         }
     }
+    post {
+      always{
+          echo 'I will always say Hello again!'
+      }
+      failure {
+        mail to: 'fred.wang@bcldb.com',
+             subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Something is wrong with ${env.BUILD_URL}"
+    }
+}
 }
