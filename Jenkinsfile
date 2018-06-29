@@ -18,7 +18,7 @@ pipeline {
             }
          }
         
-        stage('Dev deployment') {
+        stage('Deploy - Devlopment') {
             when {
                 branch 'development'
             }
